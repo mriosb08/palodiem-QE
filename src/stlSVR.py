@@ -84,25 +84,25 @@ def load_feat(feat_file):
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='python stlSVR.py')
-    parser.add_argument('--training-examples', action="append", dest='training_examples',
+    parser.add_argument('--training-examples', dest='training_examples',
                             help='Training examples', required=True)
-    parser.add_argument('--training-labels', action="append", dest='training_labels',
+    parser.add_argument('--training-labels', dest='training_labels',
                             help='Training labels', required=True)
-    parser.add_argument('--unlabelled-examples', action="append", dest='un_examples',
+    parser.add_argument('--unlabelled-examples', dest='un_examples',
                             help='Unlabelled examples', required=True)
-    parser.add_argument('--test', action="append", dest='test',
+    parser.add_argument('--test', dest='test',
                             help='Test segments', required=True)
-    parser.add_argument('--output', action="append", dest='output_file',
+    parser.add_argument('--output', dest='output_file',
                             help='Prediction output', required=True)
-    parser.add_argument('--epsilon', action="append", dest='epsilon',
-            help='epsilon parameter for SVR default:0.232 ', default=0.232)
-    parser.add_argument('--c', action="append", dest='c',
-            help='C parameter for SVR default:41.06 ', default=41.06)
-    parser.add_argument('--hidden-layer', action="append", dest='hidden',
-            help='size hidden layer default:10 ', default=10)
+    parser.add_argument('--epsilon', dest='epsilon',
+            help='epsilon parameter for SVR default:0.232 ', type=float, default=0.232)
+    parser.add_argument('--c', dest='c',
+            help='C parameter for SVR default:41.06 ', type=float, default=41.06)
+    parser.add_argument('--hidden-layer', dest='hidden',
+            help='size hidden layer default:10 ', type=int, default=10)
     results = parser.parse_args()
 
-    main(results.training_examples, results.training_labels, 
+    main([results.training_examples, results.training_labels, 
             results.un_examples, results.test, results.output_file, 
-            results.epsilon, results.c, results.hidden)
+            results.epsilon, results.c, results.hidden])
 
