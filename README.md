@@ -5,6 +5,12 @@ Transfer-based Quality Estimation (QE).
 Srcipts to test different trasnfer learning methods on QE.
 *Please update paths acordingly to your system.
 
+##Directories
+
+Scripts: src/ Transfer-based QE scripts.
+Data: data/ QuEst features and HTER labels frm Autodesk data.
+
+
 ##Features
 
 QuEst:
@@ -30,19 +36,19 @@ sh bicvm.sh
 
 Self-Taugh Learning:
 
-python src/stlSVR.py \
-  --training-examples autodesk.training.en-es.feat \ 
-  --training-labels autodesk.training.en-es.hter \
-  --unlabelled-examples autodesk.training.en-pt.feat \
-  --test autodesk.test.en-pt.feat \
-  --output autodesk.en-pt.pred \
-  --epsilon 41.06 \
-  --c 0.232 \
+python src/stlSVR.py 
+  --training-examples autodesk.training.en-es.feat 
+  --training-labels autodesk.training.en-es.hter 
+  --unlabelled-examples autodesk.training.en-pt.feat 
+  --test autodesk.test.en-pt.feat 
+  --output autodesk.en-pt.pred 
+  --epsilon 41.06 
+  --c 0.232 
   --hidden-layer 50
 
 Spectral Learning:
 
-usage:python ccaQEpy <training-features> <training-label> <test-features> <test-labels> <U-file> <hid-size>
+usage:python ccaQEpy [training-features] [training-label] [test-features] [test-labels] [U-file] [hid-size]
 
 python /data/mrios/workspace/palodiem-qe/ccaQE.py sent.training.autodesk.en-ru.vec autodesk.training.en-ru.hter sent.test.autodesk.en-pl.vec autodesk.test.en-pl.hter sent.training.autodesk.en-pl.vec 10
 
@@ -50,7 +56,7 @@ python /data/mrios/workspace/palodiem-qe/ccaQE.py sent.training.autodesk.en-ru.v
 
 SRV Baseline:
 
-usage:python SVR.py <training-features> <training-label> <test-features> <test-labels> <C> <epsilon>
+usage:python SVR.py [training-features] [training-label] [test-features] [test-labels] [C] [epsilon]
 
 python /data/mrios/workspace/palodiem-qe/SVR.py sent.training.autodesk.en-es.pe.quest autodesk.training.en-es.hter sent.test.autodesk.en-pt-es.quest autodesk.test.en-pt-es.clean.goo.hter 41.06 0.232
 
@@ -58,7 +64,7 @@ Latent variable Gaussian Process (LVGP):
 
 *We use the LVGP instead of autoencoder to perfom Self-taugh Learning.
 
-usage:python GPReg.3.py <training-features> <training-label> <test-features> <test-label> <u-file> <hid-dim> <output>
+usage:python GPReg.3.py [training-features] [training-label] [test-features] [test-label] [u-file] [hid-dim] [output]
 
 python /data/mrios/workspace/palodiem-qe/GPReg.3.py ../autodesk/sent.training.autodesk.en-es.pe.quest ../autodesk/autodesk.training.en-es.hter wmt12.test.en-es.quest wmt12.test.en-es.goo.hter wmt12.training.en-es.quest 10 deepGP.pred
 
