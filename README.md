@@ -7,8 +7,9 @@ Srcipts to test different trasnfer learning methods on QE.
 
 ##Directories
 
-Scripts: src/ Transfer-based QE scripts.
-Data: data/ QuEst features and HTER labels frm Autodesk data.
+Scripts: (src/) Transfer-based QE scripts.
+
+Data: (data/) QuEst features and HTER labels frm Autodesk data.
 
 
 ##Features
@@ -34,7 +35,7 @@ sh bicvm.sh
 
 ##Available transfer models
 
-Self-Taugh Learning:
+Self-Taugh Learning (STL):
 
 python src/stlSVR.py 
   --training-examples autodesk.training.en-es.feat 
@@ -62,7 +63,7 @@ python /data/mrios/workspace/palodiem-qe/SVR.py sent.training.autodesk.en-es.pe.
 
 Latent variable Gaussian Process (LVGP):
 
-*We use the LVGP instead of autoencoder to perfom Self-taugh Learning.
+*We use the LVGP instead of autoencoder to perfom STL.
 
 usage:python GPReg.3.py [training-features] [training-label] [test-features] [test-label] [u-file] [hid-dim] [output]
 
