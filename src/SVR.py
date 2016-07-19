@@ -13,30 +13,21 @@ import re
 
 def main(args):
     (training_file, label_file, test_file, test_label, c, e) = args
-    #svm_model = SVC()
     svr = SVR(C=float(c), epsilon=float(e), kernel='rbf')
-    #svr = SVR()
-    #svr = LogisticRegression(C=1e15)
     X = load_feat(training_file)
     y = [float(line.strip()) for line in open(label_file)]
     
     X = np.asarray(X)
-    #X = np.delete(X, 4, 1)
-    X = preprocessing.normalize(X, norm='l2')
      
     y = np.asarray(y)
     
     test_X = load_feat(test_file)
     test_X = np.asarray(test_X)
-    #test_X = np.delete(test_X, 4, 1)
     test_X[np.isnan(test_X)] = 0
-    test_X = preprocessing.normalize(test_X, norm='l2')
 
     svr.fit(X, y)
     
     pred = svr.predict(test_X)
-    #print pred
-    #print test_y
     if test_label != 'none':
         test_y = [float(line.strip()) for line in open(test_label)]
         test_y = np.asarray(test_y)
@@ -49,8 +40,6 @@ def main(args):
     with open(test_file + '.svr.pred', 'w') as output:
         for p in pred:
             print >>output, p
-    #svm_model.fit(X, y)
-    #pickle.dump(lr, open(model_file, "wb"))
     return
 
 def load_feat(feat_file):
