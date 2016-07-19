@@ -2,8 +2,10 @@
 ##Palodiem Project
 
 Transfer-based Quality Estimation (QE).
-Srcipts to test different trasnfer learning methods on QE.
-*Please update paths acordingly to your system.
+
+Scripts to test different trasnfer learning methods on QE.
+
+*Please update paths accordingly to your system.
 
 ##Directories
 
@@ -19,7 +21,7 @@ QuEst:
 
 *config for QueEst example: config_en-es.autodesk.properties
 
-extract QuEst features:
+Extract QuEst features:
 
 sh extract_quest.sh 
 
