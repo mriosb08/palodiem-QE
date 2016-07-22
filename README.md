@@ -50,7 +50,6 @@ python src/stlSVR.py
   --hidden-layer 50
 
 Spectral Learning:
-
 usage:python ccaQEpy [training-features] [training-label] [test-features] [test-labels] [U-file] [hid-size]
 
 python /data/mrios/workspace/palodiem-qe/ccaQE.py sent.training.autodesk.en-ru.vec autodesk.training.en-ru.hter sent.test.autodesk.en-pl.vec autodesk.test.en-pl.hter sent.training.autodesk.en-pl.vec 10
