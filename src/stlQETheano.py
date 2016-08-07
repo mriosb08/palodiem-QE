@@ -11,12 +11,9 @@ import numpy as np
 import GPy
 from theano.tensor.shared_randomstreams import RandomStreams
 
-rho = 0.5
-lamda = 0.0005
-beta = 100
 max_iterations = 100
 u_size = 10000
-batch_size=20
+batch_size = 1000
 
 def main(args):
     (training_file, label_file, u_file, test_file, test_label, output, n, hid_size) = args
@@ -39,12 +36,13 @@ def main(args):
     rng = np.random.RandomState(123)
     theano_rng = RandomStreams(rng.randint(2 ** 30))
     n_train_batches = U.get_value().shape[0]
+    print n_train_batches
     u_da = dA(numpy_rng=rng, theano_rng=theano_rng, input=ul, n_visible=visible_size, n_hidden=int(hid_size))
     #print u_da.n_visible
     #print u_da.n_hidden
     cost, updates = u_da.get_cost_updates(
-        corruption_level=0.5,
-        learning_rate=0.000001
+        corruption_level=1.0,
+        learning_rate=0.00001
     )
     train_da = theano.function(
         [index],
@@ -66,17 +64,17 @@ def main(args):
         # go through trainng set
         c = []
         for batch_index in xrange(n_train_batches):
-            c.append(train_da(batch_index))
-        
+            c_tmp = train_da(batch_index)
+            c.append(c_tmp) 
         #print 'Training epoch %d, cost ' % epoch, np.mean(c)
     #end_time = timeit.default_timer()
 
     #training_time = (end_time - start_time)
     
 
-    train_features = u_da.reconstruct(X)
-    test_features = u_da.reconstruct(test_X)
-   
+    train_features = u_da.get_hidden_values(X)
+    test_features = u_da.get_hidden_values(test_X)
+    print train_features.eval().shape
 
     #print dir(train_features)
     #print type(train_features.eval())
@@ -87,6 +85,7 @@ def main(args):
     #kernel = GPy.kern.RBF()
     #m = GPy.models.GPRegression(X, y)
     #n = '1000'
+    print train_features.eval()
     print 'model build'
     kernel = GPy.kern.RBF(input_dim=int(hid_size), variance=1., lengthscale=1.)
     m = GPy.models.SparseGPRegression(train_features.eval(), y, kernel=kernel, num_inducing=int(n))

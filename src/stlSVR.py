@@ -14,7 +14,7 @@ rho = 0.5
 lamda = 0.0005
 beta = 100
 #hidden_size = 20
-max_iterations = 30
+max_iterations = 100
 u_size = 10000
 
 def main(args):
